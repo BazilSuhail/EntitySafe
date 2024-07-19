@@ -1,0 +1,38 @@
+/* globals.css */
+.shape {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgb(56, 56, 56);
+    /* Dark gray background */
+    z-index: 2;
+    opacity: 0.5;
+    /* Reduced opacity */
+    filter: blur(8px);
+    /* Blurring effect */
+}
+
+/* globals.css */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 100% 0;
+    }
+
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+.gradientAnimation {
+    margin-top: -55px;
+    background: linear-gradient(90deg, rgb(177, 177, 177) 0%, rgb(125, 119, 119),rgb(195, 189, 189));
+    background-size: 200% 100%;
+    animation: gradientAnimation 4s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 105px;
+    font-weight: 900;
+}

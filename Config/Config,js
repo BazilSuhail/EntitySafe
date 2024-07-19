@@ -1,0 +1,40 @@
+import firebase from 'firebase/compat/app';
+import { useEffect, useState } from "react";
+import 'firebase/compat/auth';
+import 'firebase/compat/database';
+import 'firebase/compat/storage';
+
+const firebaseConfig = { 
+    
+  apiKey: "AIzaSyCHRsCkuLO3aaIBqSGh-jRN8WO2iaYh8fY",
+  authDomain: "entitysafe-a3a88.firebaseapp.com",
+  databaseURL: "https://entitysafe-a3a88-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "entitysafe-a3a88",
+  storageBucket: "entitysafe-a3a88.appspot.com",
+  messagingSenderId: "473735399260",
+  appId: "1:473735399260:web:a951f95f421639cbeaa399",
+  measurementId: "G-M2T2GJQ0MZ"
+};
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.database();
+const st = firebase.storage();
+
+const useFirebaseAuth = () => {
+  const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  return { currentUser, loading };
+};
+
+export { auth, db, st, firebase,useFirebaseAuth };

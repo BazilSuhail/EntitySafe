@@ -7,6 +7,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'backrground-color': '#121212',
+        'navbar-color': '#18181C', 
+        'search-color': '#202020', 
+      },
+      boxShadow: {
+        'contact-shadow': '0px 0px 30px rgba(255, 177, 134, 0.434)', 
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -16,3 +24,7 @@ module.exports = {
   },
   plugins: [],
 };
+/*320f03 
+
+        
+*/
