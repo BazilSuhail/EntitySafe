@@ -216,7 +216,7 @@ const AppList = () => {
   const [topFiveApps, setTopFiveApps] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const categories = ["Desktop Game", "desktop", "desktopApplication"];
+  const categories = ["Desktop Game", "Desktop Application", "Mobile Application"];
   useEffect(() => {
     const fetchApps = async () => {
       const appsRef = db.ref('apps');
@@ -256,12 +256,11 @@ const AppList = () => {
             </Link>
           ))}
         </div>
-        <div>
-      <h1 className='text-2xl font-bold mb-8'>All Apps</h1>
-      {categories.map((category) => (
-        <AppCategorySection key={category} category={category} apps={apps} />
-      ))}
-    </div>
+        <div> 
+          {categories.map((category) => (
+            <AppCategorySection key={category} category={category} apps={apps} />
+          ))}
+        </div>
       </div>
 
     </div>

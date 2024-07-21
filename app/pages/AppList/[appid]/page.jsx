@@ -35,7 +35,7 @@ const MediaCarousel = ({ videoUrl, imageUrls, appDetailsName }) => {
 
   return (
     <div className='w-[100%] flex flex-col'>
-      <div className='w-full h-[280px] md:h-[300px] lg:h-[400px]'>
+      <div className='w-full h-[200px] sm:h-[340px] md:h-[420px] lg:h-[400px] xl:h-[430px]'>
         {activeMedia.includes('youtube.com') ? (
           <iframe
             width="100%"

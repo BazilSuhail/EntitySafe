@@ -67,6 +67,22 @@ const AdminEditApp = ({ params }) => {
         }
     }, [id]);
 
+
+    const handleArrayChange = (index, value, arrayName) => {
+        const newArray = [...appData[arrayName]];
+        newArray[index] = value;
+        setAppData((prevData) => ({ ...prevData, [arrayName]: newArray }));
+    };
+
+    const handleArrayDelete = (index, arrayName) => {
+        const newArray = appData[arrayName].filter((_, i) => i !== index);
+        setAppData((prevData) => ({ ...prevData, [arrayName]: newArray }));
+    };
+
+    const handleArrayAdd = (arrayName) => {
+        setAppData((prevData) => ({ ...prevData, [arrayName]: [...prevData[arrayName], ''] }));
+    };
+ 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setAppData((prevData) => ({ ...prevData, [name]: value }));

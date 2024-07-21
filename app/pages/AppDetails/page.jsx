@@ -1,9 +1,8 @@
-// components/AppDetails.js
+'use client';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
-import 'firebase/compat/storage';
+import Link from 'next/link';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCHRsCkuLO3aaIBqSGh-jRN8WO2iaYh8fY",
@@ -16,71 +15,94 @@ const firebaseConfig = {
     measurementId: "G-M2T2GJQ0MZ"
 };
 
+// Initialize Firebase
 if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
 }
 
 const db = firebase.database();
 
 const AppDetails = () => {
-  const [appDetails, setAppDetails] = useState(null);
-  const router = useRouter();
-  const { id } = router.query;
+    const [apps, setApps] = useState([]);
+    const [filteredApps, setFilteredApps] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('All');
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (id) {
-      const fetchAppDetails = async () => {
-        const appRef = db.ref(`apps/${id}`);
-        appRef.on('value', (snapshot) => {
-          setAppDetails(snapshot.val());
-        });
-      };
-      fetchAppDetails();
-    }
-  }, [id]);
+    // Array of categories - you can manually handle this as needed
+    const categories = ['All', 'Desktop Game', 'Desktop Application', 'Mobile Applications'];
 
-  if (!appDetails) {
-    return <p>Loading...</p>;
-  }
+    useEffect(() => {
+        const fetchApps = async () => {
+            const appsRef = db.ref('apps');
+            appsRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                const appsArray = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+                setApps(appsArray);
+                setFilteredApps(appsArray);
+                setLoading(false); // Set loading to false after fetching data
+            });
+        };
 
-  return (
-    <div>
-      <h1>{appDetails.name}</h1>
-      <img src={appDetails.coverPhoto} alt={appDetails.name} width="200" height="200" />
-      <h2>Images</h2>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {appDetails.images.map((image, index) => (
-          <div key={index} style={{ margin: '10px' }}>
-            <img src={image} alt={`${appDetails.name} image ${index + 1}`} width="200" height="200" />
-          </div>
-        ))}
-      </div>
-      <h2>Description</h2>
-      <p>{appDetails.description}</p>
-      <h2>Genres</h2>
-      <ul>
-        {appDetails.genres.map((genre, index) => (
-          <li key={index}>{genre}</li>
-        ))}
-      </ul>
-      <h2>Titles</h2>
-      <ul>
-        {appDetails.titles.map((title, index) => (
-          <li key={index}>{title}</li>
-        ))}
-      </ul>
-      <h2>Trailer</h2>
-      <iframe 
-        width="560" 
-        height="315" 
-        src={appDetails.trailerLink} 
-        title="YouTube video player" 
-        frameBorder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowFullScreen>
-      </iframe>
-    </div>
-  );
+        fetchApps();
+    }, []);
+
+    useEffect(() => {
+        if (selectedCategory === 'All') {
+            setFilteredApps(apps);
+        } else {
+            setFilteredApps(apps.filter(app => app.category === selectedCategory));
+        }
+    }, [selectedCategory, apps]);
+
+    const handleCategoryClick = (category) => {
+        setSelectedCategory(category);
+    };
+
+    return (
+        <div className='pt-[85px] bg-background-color min-h-screen text-gray-200'>
+            <div className='max-w-6xl mx-auto p-6'>
+                <h2 className='text-3xl font-bold mb-6'>App Details</h2>
+
+                {loading ? (
+                    <div className='flex justify-center items-center h-screen'>
+                        <p className='text-lg font-semibold'>Loading...</p>
+                    </div>
+                ) : (
+                    <>
+                        <div className='flex mb-6'>
+                            {categories.map((category) => (
+                                <div
+                                    key={category}
+                                    onClick={() => handleCategoryClick(category)}
+                                    className={`cursor-pointer p-3 rounded-md mr-2 text-center transition-colors duration-300
+                                        ${selectedCategory === category ? 'bg-black text-gray-200' : 'bg-gray-500 text-gray-300'}`}
+                                >
+                                    {category === 'All' ? <p>{category}</p> : <p>{category}s</p>}
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
+                            {filteredApps.map((app) => (
+                                <Link
+                                    key={app.id}
+                                    href={`/pages/AppList/${app.id}`}
+                                    className='flex flex-col items-center p-4 bg-gray-800 rounded-md border border-gray-700 hover:bg-gray-700'
+                                >
+                                    <img
+                                        src={app.appIcon}
+                                        alt={app.name}
+                                        className='w-24 h-24 object-cover mb-4'
+                                    />
+                                    <h3 className='text-lg font-semibold'>{app.name}</h3>
+                                </Link>
+                            ))}
+                        </div>
+                    </>
+                )}
+            </div>
+        </div>
+    );
 };
 
 export default AppDetails;
