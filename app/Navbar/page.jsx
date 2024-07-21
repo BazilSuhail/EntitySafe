@@ -49,9 +49,10 @@ const Navbar = () => {
                     ))*/}
                 </div>
                 
-                <Link href={"/"} ><CgHomeAlt className='text-[28px] text-gray-400 '/></Link>
-                <Link href={"/pages/DisplayApp"} className="ml-[25px]  font-medium text-slate-300">Discover</Link>
-                <Link href={"/pages/AppList"} className="ml-[18px]  font-medium text-slate-300">Applist</Link>
+                <Link href={"/"} ><CgHomeAlt className='text-[28px] text-gray-400 '/></Link> 
+                <Link href={"/pages/AppList"} className="ml-[18px]  font-medium text-slate-300">Discover</Link>
+                
+                <Link href={"/pages/AppList"} className="ml-[18px]  font-medium text-slate-300">Apps</Link>
                 <Link href={"/AdminApp"} className="ml-[18px]  font-medium text-slate-300">Admin</Link>
                 <Link href={"/AdminappList"} className="ml-[18px]  font-medium text-slate-300">Edit Apps</Link> 
 

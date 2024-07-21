@@ -155,6 +155,11 @@ const InstallationBar = ({ appDetails, handleInstallApp }) => {
     </div>
   );
 };
+const badgeUrls = {
+  "C++": "https://img.shields.io/badge/c++%20-%2300599C.svg?&style=for-the-badge&logo=c%2B%2B&logoColor=white",
+  "SFML": "https://img.shields.io/badge/SFML-%23FF7139.svg?&style=for-the-badge&logo=sfml&logoColor=white",
+  // Add more mappings as needed
+};
 
 const AppDetails = ({ params }) => {
   const [appDetails, setAppDetails] = useState(null);
@@ -284,14 +289,25 @@ const AppDetails = ({ params }) => {
               ))}
             </div>
           </div>
-
+ 
           <div className='bg-search-color mt-[25px] rounded-lg px-[20px] py-[12px] inline-block'>
-            <div className='text-gray-300 '>Teck Stack</div>
-            <div className='flex ml-[-6px]'>
-              {appDetails.teckStack.map((teckStack, index) => (
-                <p className='ml-[6px]' key={index}>
-                  <span className='underline'>{teckStack}</span>
-                </p>
+            <div className='text-gray-300 mb-[6px] '>Teck Stack</div>
+            <div className='flex items-center ml-[-6px]'>
+              {appDetails.techStack.map((stack, index) => (
+                <div key={index} className='ml-[6px] inline-block'>
+                  {badgeUrls[stack] ? (
+                    <Image
+                      src={badgeUrls[stack]}
+                      alt={stack}
+                      width={75}  // Adjust width as needed
+                      height={12}  // Adjust height as needed
+                      layout="intrinsic"
+                      unoptimized={true}  // Disable optimization for SVGs
+                    />
+                  ) : (
+                    <p className='underline'>{stack}</p>
+                  )}
+                </div>
               ))}
             </div>
           </div>

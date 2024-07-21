@@ -54,7 +54,7 @@ const TopFiveApps = ({ apps }) => {
   return (
     <div className='flex bg-background-color flex-col lg:h-screen'>
       <div className='xl:px-[12vw] lg:justify-evenly flex lg:flex-row items-center flex-col px-[15px]'>
-        <div className='relative w-[95vw] lg:w-[60vw] h-[32vh] md:h-[45vh] lg:h-[510px] rounded-2xl bg-gray-600 overflow-hidden'>
+        <div className='relative w-[95vw] lg:w-[75vw] xl:w-[60vw] h-[220px] sm:h-[380px] md:h-[430px] lg:h-[440px] xl:h-[510px] rounded-2xl bg-gray-600 overflow-hidden'>
           <AnimatePresence>
             {apps.map((app, index) => (
               index === activeIndex && (
