@@ -11,6 +11,7 @@ module.exports = {
         'backrground-color': '#121212',
         'navbar-color': '#18181C', 
         'search-color': '#202020', 
+        'base-color': 'rgb(48,48,48)', 
       },
       boxShadow: {
         'contact-shadow': '0px 0px 30px rgba(255, 177, 134, 0.434)', 

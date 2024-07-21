@@ -52,7 +52,7 @@ const Navbar = () => {
                 <Link href={"/"} ><CgHomeAlt className='text-[28px] text-gray-400 '/></Link>
                 <Link href={"/pages/DisplayApp"} className="ml-[25px]  font-medium text-slate-300">Discover</Link>
                 <Link href={"/pages/AppList"} className="ml-[18px]  font-medium text-slate-300">Applist</Link>
-                <Link href={"/AdminSide/AdminApp"} className="ml-[18px]  font-medium text-slate-300">Admin</Link>
+                <Link href={"/AdminApp"} className="ml-[18px]  font-medium text-slate-300">Admin</Link>
                
                 <div className="ml-[18px]  font-medium text-slate-300">Discover</div>
 
@@ -112,7 +112,7 @@ const Navbar = () => {
                                 exit={{ x: -100, opacity: 0, transition: { duration: 0.2 } }}
                                 className="flex flex-col mt-10"
                             >
-                                <div className="font-medium w-[85%] rounded-lg bg-gray-700 mx-auto py-[5px] pl-[15px] text-[18px] text-slate-300 mb-[15px] cursor-pointer">Support</div>
+                                <Link href={"/pages/AppList"} className="font-medium w-[85%] rounded-lg bg-gray-700 mx-auto py-[5px] pl-[15px] text-[18px] text-slate-300 mb-[15px] cursor-pointer">Support</Link>
                                 <div className="font-medium w-[85%] rounded-lg bg-gray-700 mx-auto py-[5px] pl-[15px] text-[18px] text-slate-300 mb-[15px] cursor-pointer">Discover</div>
                             </motion.div>
 
