@@ -106,9 +106,10 @@ const TopFiveApps = ({ apps }) => {
     </div>
   );
 };
+/*
 
 
-const applications = ({ apps }) => {
+const Applications = ({ apps }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
 
@@ -120,7 +121,7 @@ const applications = ({ apps }) => {
     }, 8000); // 8-second interval
 
     return () => clearInterval(interval);
-  }, [apps.length]);
+  }, [5]);
 
   useEffect(() => {
     // Update progress every 100ms
@@ -189,12 +190,33 @@ const applications = ({ apps }) => {
     </div>
   );
 };
+*/
 
+const AppCategorySection = ({ category, apps }) => {
+  const filteredApps = apps.filter(app => app.category === category);
+
+  return (
+    <div className='mb-8'>
+      <h2 className='text-xl font-bold mb-4'>{category}s</h2>
+      <div className='flex flex-wrap'>
+        {filteredApps.map((app) => (
+          <Link key={app.id} href={`/pages/AppList/${app.id}`}>
+            <div style={{ margin: '10px', textDecoration: 'none', color: 'inherit' }}>
+              <Image src={app.coverPhoto} alt={app.name} width={200} height={400} />
+              <p>{app.name}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
 const AppList = () => {
   const [apps, setApps] = useState([]);
   const [topFiveApps, setTopFiveApps] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const categories = ["Desktop Game", "desktop", "desktopApplication"];
   useEffect(() => {
     const fetchApps = async () => {
       const appsRef = db.ref('apps');
@@ -216,24 +238,32 @@ const AppList = () => {
     return <div className='flex items-center justify-center h-screen'>Loading...</div>;
   }
 
-  return ( 
-      <div className='pt-[85px]'>
-        {topFiveApps.length > 0 && <TopFiveApps apps={topFiveApps} />}
+  return (
+    <div className='pt-[85px]'>
+      {topFiveApps.length > 0 && <TopFiveApps apps={topFiveApps} />}
+
+
+      <div className='xl:px-[13vw] lg:justify-evenly flex flex-col px-[15px]'>
+
         <h1>All Apps</h1>
-        <div style={{ display: 'flex' }}>
+        <div className='flex '>
           {apps.map((app) => (
-            <Link key={app.id} href={`/pages/AppList/${app.id}`}>
+            <Link key={app.id} href={`/pages/AppList/${app.id}`} >
               <div style={{ margin: '10px', textDecoration: 'none', color: 'inherit' }}>
                 <Image src={app.coverPhoto} alt={app.name} width={200} height={400} />
                 <p>{app.name}</p>
               </div>
             </Link>
           ))}
+        </div>
+        <div>
+      <h1 className='text-2xl font-bold mb-8'>All Apps</h1>
+      {categories.map((category) => (
+        <AppCategorySection key={category} category={category} apps={apps} />
+      ))}
+    </div>
+      </div>
 
-          <div>
-            <applications />
-          </div>
-        </div> 
     </div>
   );
 };

@@ -270,7 +270,9 @@ const AppDetails = ({ params }) => {
             imageUrls={imageUrls}
             appDetailsName={appDetails.name}
           />
+
           <p className='text-sm md:text-[16px] mt-[15px]  text-gray-300'>{appDetails.description}</p>
+
           <div className='bg-search-color mt-[25px] rounded-lg px-[20px] py-[12px] inline-block'>
             <div className='text-gray-300 '>Genres</div>
             <div className='flex ml-[-6px]'>
@@ -282,13 +284,19 @@ const AppDetails = ({ params }) => {
               ))}
             </div>
           </div>
-          <div className='bg-search-color mt-[15px] sm:mt-[25px] rounded-lg pl-[15px] py-[12px] inline-block'>
-            <div className='text-gray-300 '>Category</div>
-            <div className='ml-[6px] font-bold'># {appDetails.category}</div>
+
+          <div className='bg-search-color mt-[25px] rounded-lg px-[20px] py-[12px] inline-block'>
+            <div className='text-gray-300 '>Teck Stack</div>
+            <div className='flex ml-[-6px]'>
+              {appDetails.teckStack.map((teckStack, index) => (
+                <p className='ml-[6px]' key={index}>
+                  <span className='underline'>{teckStack}</span>
+                </p>
+              ))}
+            </div>
           </div>
 
           <div className='lg:hidden block md:w-[65%] w-[95%] sm:w-[85%] pt-[15px] mx-auto'>
-
             <InstallationBar appDetails={appDetails} handleInstallApp={handleInstallApp} />
           </div>
 
@@ -300,15 +308,15 @@ const AppDetails = ({ params }) => {
               <p key={index}>{functionality}</p>
             </div>
           ))}
+
           <h1 className='text-gray-200 text-[30px] my-[15px] font-medium'>Functionalities</h1>
-          {appDetails.titles.map((titles, index) => (
+          {appDetails.features.map((features, index) => (
             <div className='flex   '>
               <p className='w-[10px] mt-[7px] h-[10px] mr-[8px] p-[4px] bg-white rounded-full'></p>
-              <p key={index}>{titles}</p>
+              <p key={index}>{features}</p>
             </div>
           ))}
         </div>
-
 
         <div className='lg:h-screen lg:block hidden pt-[135px] col-span-3 '>
           <InstallationBar appDetails={appDetails} handleInstallApp={handleInstallApp} />

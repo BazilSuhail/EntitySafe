@@ -53,8 +53,7 @@ const Navbar = () => {
                 <Link href={"/pages/DisplayApp"} className="ml-[25px]  font-medium text-slate-300">Discover</Link>
                 <Link href={"/pages/AppList"} className="ml-[18px]  font-medium text-slate-300">Applist</Link>
                 <Link href={"/AdminApp"} className="ml-[18px]  font-medium text-slate-300">Admin</Link>
-               
-                <div className="ml-[18px]  font-medium text-slate-300">Discover</div>
+                <Link href={"/AdminappList"} className="ml-[18px]  font-medium text-slate-300">Edit Apps</Link> 
 
                 <div className='w-[250px] ml-auto mr-[15px] bg-search-color rounded-3xl border-gray-500 flex items-center border-[1px] px-[6px] py-[4px]'>
                     <IoSearchOutline size={25} className="text-white mr-[15px]" />

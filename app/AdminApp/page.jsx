@@ -28,17 +28,19 @@ const AdminAppManagement = () => {
   const [appDescription, setAppDescription] = useState('');
   const [genres, setGenres] = useState([]);
   const [newGenre, setNewGenre] = useState('');
-  const [titles, setTitles] = useState([]);
-  const [newTitle, setNewTitle] = useState('');
+  const [features, setFeatures] = useState([]);
+  const [newFeature, setNewFeature] = useState('');
   const [trailerLink, setTrailerLink] = useState('');
   const [coverPhotoFile, setCoverPhotoFile] = useState(null);
-  const [appIconFile, setAppIconFile] = useState(null); // State for app icon file
+  const [appIconFile, setAppIconFile] = useState(null);
   const [images, setImages] = useState(['', '', '', '', '']);
   const [newFunctionality, setNewFunctionality] = useState('');
   const [functionalities, setFunctionalities] = useState([]);
   const [category, setCategory] = useState('');
   const [appFile, setAppFile] = useState(null);
   const [appFileDownloadUrl, setAppFileDownloadUrl] = useState('');
+  const [techStack, setTechStack] = useState([]);
+  const [newTechStackItem, setNewTechStackItem] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleAddGenre = () => {
@@ -48,10 +50,10 @@ const AdminAppManagement = () => {
     }
   };
 
-  const handleAddTitle = () => {
-    if (newTitle.trim() !== '') {
-      setTitles([...titles, newTitle]);
-      setNewTitle('');
+  const handleAddFeature = () => {
+    if (newFeature.trim() !== '') {
+      setFeatures([...features, newFeature]);
+      setNewFeature('');
     }
   };
 
@@ -59,6 +61,13 @@ const AdminAppManagement = () => {
     if (newFunctionality.trim() !== '') {
       setFunctionalities([...functionalities, newFunctionality]);
       setNewFunctionality('');
+    }
+  };
+
+  const handleAddTechStackItem = () => {
+    if (newTechStackItem.trim() !== '') {
+      setTechStack([...techStack, newTechStackItem]);
+      setNewTechStackItem('');
     }
   };
 
@@ -92,7 +101,7 @@ const AdminAppManagement = () => {
       name: appName,
       description: appDescription,
       genres,
-      titles,
+      features,
       trailerLink,
       coverPhoto: coverPhotoUrl,
       appIcon: appIconUrl,
@@ -100,6 +109,7 @@ const AdminAppManagement = () => {
       functionalities,
       category,
       appFile: appFileDownloadUrl,
+      techStack,
     };
 
     await newAppRef.set(newApp);
@@ -108,7 +118,7 @@ const AdminAppManagement = () => {
     setAppName('');
     setAppDescription('');
     setGenres([]);
-    setTitles([]);
+    setFeatures([]);
     setTrailerLink('');
     setCoverPhotoFile(null);
     setAppIconFile(null);
@@ -116,6 +126,7 @@ const AdminAppManagement = () => {
     setFunctionalities([]);
     setCategory('');
     setAppFile(null);
+    setTechStack([]);
     setLoading(false);
   };
 
@@ -200,86 +211,126 @@ const AdminAppManagement = () => {
           </div>
           <div className='mb-6'>
             <h3 className='text-xl font-semibold mb-3'>Genres</h3>
-            <div className='flex items-center mb-3'>
+            <div className='flex flex-col mb-3'>
               <input
                 type="text"
                 placeholder="Enter Genre"
                 value={newGenre}
                 onChange={(e) => setNewGenre(e.target.value)}
                 className='w-full p-2 mr-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
-              />
-              <button 
-                onClick={handleAddGenre} 
-                className='p-2 bg-blue-600 text-gray-200 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                />
+                <div>
+                  
+              <button
+                onClick={handleAddGenre}
+                className='p-2 bg-blue-600 inline-block mt-[15px] rounded-md text-white hover:bg-blue-700'
               >
                 Add Genre
               </button>
+                </div>
             </div>
-            <ul className='list-disc pl-5'>
+            <div className='flex flex-wrap'>
               {genres.map((genre, index) => (
-                <li key={index} className='text-gray-400'>{genre}</li>
+                <div key={index} className='p-2 bg-gray-700 rounded-md mr-2 mb-2'>
+                  {genre}
+                </div>
               ))}
-            </ul>
-          </div>
-          <div className='mb-6'>
-            <h3 className='text-xl font-semibold mb-3'>Titles</h3>
-            <div className='flex items-center mb-3'>
-              <input
-                type="text"
-                placeholder="Enter Title"
-                value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)}
-                className='w-full p-2 mr-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
-              />
-              <button 
-                onClick={handleAddTitle} 
-                className='p-2 bg-blue-600 text-gray-200 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
-              >
-                Add Title
-              </button>
             </div>
-            <ul className='list-disc pl-5'>
-              {titles.map((title, index) => (
-                <li key={index} className='text-gray-400'>{title}</li>
-              ))}
-            </ul>
           </div>
           <div className='mb-6'>
             <h3 className='text-xl font-semibold mb-3'>Functionalities</h3>
-            <div className='flex items-center mb-3'>
+            <div className='flex flex-col mb-3'>
               <input
                 type="text"
                 placeholder="Enter Functionality"
                 value={newFunctionality}
                 onChange={(e) => setNewFunctionality(e.target.value)}
                 className='w-full p-2 mr-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
-              />
-              <button 
-                onClick={handleAddFunctionality} 
-                className='p-2 bg-blue-600 text-gray-200 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                />
+                <div >
+              <button
+                onClick={handleAddFunctionality}
+                className='p-2 bg-blue-600 mt-[15px] inline-block rounded-md text-white hover:bg-blue-700'
               >
                 Add Functionality
               </button>
+                </div>
             </div>
-            <ul className='list-disc pl-5'>
+            <div className='flex flex-wrap'>
               {functionalities.map((functionality, index) => (
-                <li key={index} className='text-gray-400'>{functionality}</li>
+                <div key={index} className='p-2 bg-gray-700 rounded-md mr-2 mb-2'>
+                  {functionality}
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
           <div className='mb-6'>
-            <h3 className='text-xl font-semibold mb-3'>Category</h3>
+            <h3 className='text-xl font-semibold mb-3'>Features</h3>
+            <div className='flex flex-col mb-3'>
+              <input
+                type="text"
+                placeholder="Enter Feature"
+                value={newFeature}
+                onChange={(e) => setNewFeature(e.target.value)}
+                className='w-full p-2 mr-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+              />
+             
+                <div>
+                <button
+                onClick={handleAddFeature}
+                className='p-2 bg-blue-600 rounded-md inline-block mt-[15px] text-white hover:bg-blue-700'
+              >
+                Add Feature
+              </button>
+                </div>
+            </div>
+            <div className='flex flex-wrap'>
+              {features.map((feature, index) => (
+                <div key={index} className='p-2 bg-gray-700 rounded-md mr-2 mb-2'>
+                  {feature}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className='mb-6'>
+            <h3 className='text-xl font-semibold mb-3'>Tech Stack</h3>
+            <div className='flex flex-col mb-3'>
+              <input
+                type="text"
+                placeholder="Enter Tech Stack Item"
+                value={newTechStackItem}
+                onChange={(e) => setNewTechStackItem(e.target.value)}
+                className='w-full p-2 mr-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
+              />
+
+              <div>
+                <button
+                  onClick={handleAddTechStackItem}
+                  className='p-2 bg-blue-600 ml-auto  mt-[15px] inline-block rounded-md text-white hover:bg-blue-700' >
+                  Add Tech Stack Item
+                </button>
+              </div>
+            </div>
+            <div className='flex flex-wrap'>
+              {techStack.map((tech, index) => (
+                <div key={index} className='p-2 bg-gray-700 rounded-md mr-2 mb-2'>
+                  {tech}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className='mb-4'>
             <input
               type="text"
-              placeholder="Enter Category"
+              placeholder="Category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               className='w-full p-3 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
-          <button 
-            onClick={handleSaveApp} 
-            className='w-full p-3 bg-green-600 text-gray-200 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500'
+          <button
+            onClick={handleSaveApp}
+            className='w-full p-3 bg-green-600 rounded-md text-white hover:bg-green-700'
           >
             Save App
           </button>
