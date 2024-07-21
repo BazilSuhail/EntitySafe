@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 import Link from 'next/link';
-
+import Image from 'next/image';
 const firebaseConfig = {
     apiKey: "AIzaSyCHRsCkuLO3aaIBqSGh-jRN8WO2iaYh8fY",
     authDomain: "entitysafe-a3a88.firebaseapp.com",
@@ -27,7 +27,7 @@ const AppDetails = () => {
     const [filteredApps, setFilteredApps] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [loading, setLoading] = useState(true);
-
+ 
     // Array of categories - you can manually handle this as needed
     const categories = ['All', 'Desktop Game', 'Desktop Application', 'Mobile Applications'];
 
@@ -59,9 +59,10 @@ const AppDetails = () => {
     };
 
     return (
-        <div className='pt-[85px] bg-background-color min-h-screen text-gray-200'>
+        <div className='pt-[85px] bg-background-color  '>
             <div className='max-w-6xl mx-auto p-6'>
                 <h2 className='text-3xl font-bold mb-6'>App Details</h2>
+                <div className='h-[3px] w-[100%] rounded-xl bg-hightlight-progress mb-[15px]'></div>
 
                 {loading ? (
                     <div className='flex justify-center items-center h-screen'>
@@ -74,8 +75,8 @@ const AppDetails = () => {
                                 <div
                                     key={category}
                                     onClick={() => handleCategoryClick(category)}
-                                    className={`cursor-pointer p-3 rounded-md mr-2 text-center transition-colors duration-300
-                                        ${selectedCategory === category ? 'bg-black text-gray-200' : 'bg-gray-500 text-gray-300'}`}
+                                    className={`cursor-pointer px-[15px] py-[4px] rounded-md mr-2 text-center transition-colors duration-300
+                                        ${selectedCategory === category ? 'bg-hightlight-progress text-gray-200' : 'border-2 border-hightlight-menu text-gray-300'}`}
                                 >
                                     {category === 'All' ? <p>{category}</p> : <p>{category}s</p>}
                                 </div>
@@ -87,14 +88,22 @@ const AppDetails = () => {
                                 <Link
                                     key={app.id}
                                     href={`/pages/AppList/${app.id}`}
-                                    className='flex flex-col items-center p-4 bg-gray-800 rounded-md border border-gray-700 hover:bg-gray-700'
+                                    className='flex flex-col p-4 rounded-md hover:bg-hightlight-menu'
                                 >
-                                    <img
-                                        src={app.appIcon}
-                                        alt={app.name}
-                                        className='w-24 h-24 object-cover mb-4'
-                                    />
-                                    <h3 className='text-lg font-semibold'>{app.name}</h3>
+                                    <div className='flex '>
+                                        <Image
+                                            src={app.appIcon}
+                                            alt={`${app.name} icon`}
+                                            width={90}
+                                            height={90}
+                                            className=' mr-[15px] rounded-md lg:mr-[10px] z-10'
+                                        />
+                                        <div>
+
+                                            <div className='relative text-[24px]'>{app.name}</div>
+                                            <div className='p-[5px] inline-block rounded-lg bg-hightlight-progress text-[12px] '>{app.category}</div>
+                                        </div>
+                                    </div>
                                 </Link>
                             ))}
                         </div>
