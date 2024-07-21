@@ -2,10 +2,8 @@
 // next.module.mjs
 const nextConfig = {
     images: {
-        domains: ['firebasestorage.googleapis.com'],
+        domains: ['firebasestorage.googleapis.com','githubusercontent.com','github.com'],
     },
-};
-
-
+}; 
 
 export default nextConfig;
