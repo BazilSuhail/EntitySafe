@@ -5,6 +5,7 @@ import style from "../Applist.module.css"
 import 'firebase/compat/database';
 import 'firebase/compat/storage'; // Import Firebase Storage module
 import Image from 'next/image';
+import Link from 'next/link';
 import { IoLogoWindows } from "react-icons/io5";
 import { FaShareNodes } from "react-icons/fa6";
 import { TbPhysotherapist } from "react-icons/tb";
@@ -143,14 +144,25 @@ const InstallationBar = ({ appDetails, handleInstallApp }) => {
       <div className='h-[3px] w-[95%] bg-search-color mx-auto'></div>
 
       <div className='flex justify-center text-gray-200 mt-[15px]'>
-        <button className='py-[3px] border-2 border-gray-500 w-[150px] flex items-center justify-center rounded-md'>
+        <button
+          onClick={() => {
+            const link = window.location.href; // Gets the current page URL
+            navigator.clipboard.writeText(link)
+              .then(() => {
+                alert('Link copied to clipboard!');
+              })
+              .catch((error) => {
+                console.error('Failed to copy link: ', error);
+              });
+          }}
+          className='py-[3px] border-2 border-gray-500 w-[150px] flex items-center hover:bg-hightlight-progress justify-center rounded-md'>
           <FaShareNodes />
           <span className='ml-[6px]'>Share</span>
         </button>
-        <button className='py-[3px] ml-[7px] border-2 border-gray-500 w-[150px] flex items-center justify-center rounded-md'>
+        <Link href={"/pages/AppDetails"} className='py-[3px] ml-[7px] border-2 border-gray-500 w-[150px] hover:bg-hightlight-progress flex items-center justify-center rounded-md'>
           <TbPhysotherapist size={24} />
           <span className='ml-[6px]'>Explore More</span>
-        </button>
+        </Link>
       </div>
     </div>
   );
@@ -158,6 +170,7 @@ const InstallationBar = ({ appDetails, handleInstallApp }) => {
 const badgeUrls = {
   "C++": "https://img.shields.io/badge/c++%20-%2300599C.svg?&style=for-the-badge&logo=c%2B%2B&logoColor=white",
   "SFML": "https://img.shields.io/badge/SFML-%23FF7139.svg?&style=for-the-badge&logo=sfml&logoColor=white",
+  "Python":"https://img.shields.io/badge/Python-%2308C5E0.svg?style=for-the-badge&logo=python&logoColor=white"
   // Add more mappings as needed
 };
 
@@ -289,7 +302,7 @@ const AppDetails = ({ params }) => {
               ))}
             </div>
           </div>
- 
+
           <div className='bg-search-color mt-[25px] rounded-lg px-[20px] py-[12px] inline-block'>
             <div className='text-gray-300 mb-[6px] '>Teck Stack</div>
             <div className='flex items-center ml-[-6px]'>

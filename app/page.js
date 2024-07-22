@@ -95,6 +95,7 @@ const badges1 = [
   { alt: "C++", src: "https://img.shields.io/badge/c++%20-%2300599C.svg?&style=for-the-badge&logo=c%2B%2B&ogoColor=white" },
   { alt: "SFML", src: "https://img.shields.io/badge/SFML-%23FF7139.svg?&style=for-the-badge&logo=sfml&logoColor=white" },
   { alt: "Python", src: "https://img.shields.io/badge/python%20-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white" },
+  { alt: "CSS3", src: "https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white" },
   { alt: "JavaScript", src: "https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" }
 ];
 const badges2 = [
@@ -105,17 +106,18 @@ const badges2 = [
   { alt: "MySQL", src: "https://img.shields.io/badge/mysql-%2300f.svg?&style=for-the-badge&logo=mysql&logoColor=white" }
 ];
 const badges3 = [
+  { alt: "Node js", src: "https://img.shields.io/badge/Node.js-%23339933.svg?&style=for-the-badge&logo=node.js&logoColor=white" },
   { alt: "LaTeX", src: "https://img.shields.io/badge/latex%20-%23008080.svg?&style=for-the-badge&logo=latex&logoColor=white" },
   { alt: "Supabase", src: "https://img.shields.io/badge/Supabase-%233ECF8E.svg?&style=for-the-badge&logo=supabase&logoColor=white" },
   { alt: "MongoDB", src: "https://img.shields.io/badge/MongoDB-%234ea94b.svg?&style=for-the-badge&logo=mongodb&logoColor=white" },
-  { alt: "Firebase", src: "https://img.shields.io/badge/firebase%20-%23039BE5.svg?&style=for-the-badge&logo=firebase" },
-  { alt: "SQLite", src: "https://img.shields.io/badge/sqlite-%2307405e.svg?&style=for-the-badge&logo=sqlite&logoColor=white" }
+  { alt: "Firebase", src: "https://img.shields.io/badge/firebase%20-%23039BE5.svg?&style=for-the-badge&logo=firebase" }
 ];
 const badges4 = [
   { alt: "Git", src: "https://img.shields.io/badge/git%20-%23F05033.svg?&style=for-the-badge&logo=git&logoColor=white" },
   { alt: "Windows 10", src: "https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" },
   { alt: "HTML5", src: "https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white" },
-  { alt: "CSS3", src: "https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white" }
+  { alt: "CSS3", src: "https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white" }, 
+  { alt: "SQLite", src: "https://img.shields.io/badge/sqlite-%2307405e.svg?&style=for-the-badge&logo=sqlite&logoColor=white" }
 ];
 // Split text into words
 const splitTextIntoWords = (text) => {
@@ -123,7 +125,7 @@ const splitTextIntoWords = (text) => {
 };
 const AnimatedText = () => {
   const controls = useAnimation();
-  const text = `Hey there! Welcome to ENTITYcode Store, where I, Bazil Suhail, showcase a curated collection of both mobile and desktop applications. As a software engineer with a knack for creating elegant digital experiences, I built this platform to help you discover innovative apps designed with both style and functionality in mind. ENTITYcode Store is more than just a repository; it’s a testament to my expertise and passion for developing high-quality software. Whether you're searching for productivity boosters, fun games, or unique tools, you’ll find a variety of apps that reflect the careful craftsmanship and creativity I bring to every project. Feel free to explore and find the perfect apps for your needs!`;
+  const text = `Hey there !! I am Bazil Suhail, and I am the creator of EntitySafe, a curated platform for premium mobile and desktop applications. As a dedicated software engineer, I have designed this site to offer you a selection of innovative apps that blend elegance with functionality. EntitySafe embodies my commitment to high-quality software, featuring tools and games crafted with precision and creativity. Explore and discover applications that reflect a high standard of craftsmanship and expertise.`;
 
   // Split text into words
   const words = splitTextIntoWords(text);
@@ -148,9 +150,9 @@ const AnimatedText = () => {
   
   const { scrollY } = useScroll();
   const range = [0, 500]; // Adjust this range based on your scroll container's height
-  const rotation = useTransform(scrollY, range, ['-5deg', '0deg']);
+  const rotation = useTransform(scrollY, range, ['-15deg', '0deg']);
   const opacity = useTransform(scrollY, range, [0, 1]);
-  const y = useTransform(scrollY, range, [200, 0]);
+  const y = useTransform(scrollY, range, [200, 0]); 
 
   const textColor = useTransform(scrollY, [400, 1500], ['#FF0000', '#FFFFFF']); // Adjust range as needed
 
@@ -161,10 +163,9 @@ const AnimatedText = () => {
 
   return (
     <main>
-      <section className='relative flex bg-navbar-color pt-[70px] flex-col h-screen overflow-hidden'>
-        {/* Text animation */}
-        <div className="flex z-20 flex-col items-center justify-center h-full">
 
+      <section className='relative flex bg-navbar-color pt-[70px] flex-col h-screen overflow-hidden'> 
+        <div className="flex z-20 flex-col items-center justify-center h-full"> 
           <div className='flex'>
             <motion.div
               className={style.gradientAnimation}
@@ -222,21 +223,20 @@ const AnimatedText = () => {
         </div>
       </section>
 
-      <section className="p-6 my-[35px] text-center font-bold w-[64%] mx-auto">
-        <div className="text-[25px] leading-relaxed">
+      <section className="p-6 my-[35px] text-center font-bold md:w-[80%] w-[100%] lg:w-[64%] mx-auto">
+        <div className="md:text-[20px] text-[15px] lg:text-[25px] leading-relaxed">
           {words.map(({ word, index }) => {
             // Define animation properties for each word
             const animateProps = {
               rotate: rotation,
               opacity: opacity,
-              y: y,
+              y: y, 
               transition: {
                 type: 'spring',
                 stiffness: 300,
                 damping: 30,
               },
-            };
-
+            }; 
             return (
               <motion.span
                 key={index}
@@ -323,8 +323,7 @@ const AnimatedText = () => {
 
       <section className='hidden z-10 lg:block lg:mt-[-45px] '>
         <ScrollAnimatedVideo />
-      </section>
-
+      </section> 
 
       <section className='lg:hidden block mt-[-3vh]'>
         <ScrollAnimatedVideo />
