@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./Navbar/page";
+import Footer from "./Footer/Page";
  
 
 export const metadata = {
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
       <body>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

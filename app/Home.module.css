@@ -43,6 +43,8 @@
     height: var(--height);
     margin: 30px 0px;
     padding: 2px 0px;
+    display: flex;
+    align-items: center;
     overflow: hidden;
     mask-image: linear-gradient(to right,
             transparent,
@@ -66,12 +68,7 @@
     animation: autoRun 20s linear infinite;
     transition: filter 1s;
     animation-delay: calc((20s / var(--quantity)) * (var(--position) - 1) * (-1)) !important;
-}
-
-.sdsd {
-    color: #1e0700;
-}
-
+} 
 .slider .list .techtoday {
     width: var(--width);
     height: var(--height);
@@ -123,3 +120,73 @@
         font-size: 68px;
     }
 }
+
+.verticalSlider {
+    width: var(--width);
+    height: 100%;
+    margin: 30px 0px;
+    padding: 0px 2px;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom,
+            transparent,
+            #000000 10% 90%,
+            transparent);
+  }
+  
+  .verticalSlider .verticalList {
+    display: flex;
+    flex-direction: column;
+    width: var(--width);
+    height: 100%;
+    min-height: calc(var(--height) * var(--quantity));
+    position: relative;
+  }
+  
+  .verticalSlider .verticalList .verticalItem {
+    margin-left: -2px;
+    width: var(--width);
+    height: var(--height);
+    position: absolute;
+    top: 100%;
+    animation: verticalRun 20s linear infinite;
+    transition: filter 1s;
+    animation-delay: calc((20s / var(--quantity)) * (var(--position) - 1) * (-1)) !important;
+  }
+  
+  .verticalSlider .verticalItem div:hover {
+    background-color: white;
+    filter: grayscale(0);
+  }
+  
+  @keyframes verticalRun {
+    from {
+      top: 100%;
+    }
+    to {
+      top: calc(var(--height) * -1);
+    }
+  }
+  
+  .verticalSlider:hover .verticalItem {
+    animation-play-state: paused !important;
+  }
+  
+  .verticalSlider.reverse .verticalItem {
+    animation: reverseVerticalPlay 20s linear infinite;
+  }
+  
+  @keyframes reverseVerticalPlay {
+    from {
+      top: calc(var(--height) * -1);
+    }
+    to {
+      top: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 740px) {
+    .verticalSlider {
+      font-size: 68px;
+    }
+  }
+  

@@ -59,7 +59,7 @@ const AppDetails = () => {
     };
 
     return (
-        <div className='pt-[85px] bg-background-color  '>
+        <div className='pt-[85px] bg-backrground-color '>
             <div className='max-w-6xl mx-auto p-6'>
                 <h2 className='text-3xl font-bold mb-6'>App Details</h2>
                 <div className='h-[3px] w-[100%] rounded-xl bg-hightlight-progress mb-[15px]'></div>
